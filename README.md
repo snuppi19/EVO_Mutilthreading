@@ -16,7 +16,7 @@ Trong bài này mô phỏng cộng trừ tiền đơn giản
    * atomic: ~ 600ms ->có atomic operation-> k cho các thread chen vào giữa + nhưng không dùng đc logic phức tạp( vì get và set khong được đặt cạnh nhau)
    * @Transactional(isolation = Isolation.SERIALIZABLE)-> thao tác với database -> dựa vào số lượng bảng và data + độ phức tạp của hàm
    * reentantLock: ~500ms-> lock và unlock ngay tại method -> chống race conditions -> code nhiều phức tạp ở mỗi method khi phải lock và unlock thủ công.
-   * Queue: dùng cho các tác vụ xử lí nhiều giá trị liên quan đi kèm (rabbitMQ)
+   * Queue: dùng cho các tác vụ xử lí nhiều giá trị liên quan đi kèm ( phổ biến rabbitMQ)
   
 ## Yêu cầu 
 * Java [Phiên bản 17]
