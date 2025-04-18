@@ -13,10 +13,8 @@ Trong bài này mô phỏng cộng trừ tiền đơn giản
    -> số dư acc lúc này không chính xác -> nhiều giao dịch tương tự dẫn đến làm sai lệch số dư.
 
    * synchronized: ~11000ms -> khóa method -> thread chờ nhau-> lâu
-   * atomic: ~ 600ms ->có atomic operation-> k cho các thread chen vào giữa + nhưng không dùng đc logic phức tạp( vì get và set khong được đặt cạnh nhau)
-   * @Transactional(isolation = Isolation.SERIALIZABLE)-> thao tác với database -> dựa vào số lượng bảng và data + độ phức tạp của hàm
    * reentantLock: ~500ms-> lock và unlock ngay tại method -> chống race conditions -> code nhiều phức tạp ở mỗi method khi phải lock và unlock thủ công.
-   * Queue: dùng cho các tác vụ xử lí nhiều giá trị liên quan đi kèm ( phổ biến rabbitMQ)
+   * semaphore : 41ms -> config được số lượng truy cập 
   
 ## Yêu cầu 
 * Java [Phiên bản 17]
