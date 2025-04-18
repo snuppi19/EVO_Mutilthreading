@@ -1,9 +1,8 @@
-package com.mtran.mvc.multithreading.Issue;
+package com.mtran.mvc.multithreading.Synchronized;
 
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
-public class TransactionSimulation {
+public class TransactionSimulation1 {
     static final int INIT_BALANCE = 50;
     static final int NUM_TRANS = 1000000;
     int balance = INIT_BALANCE;
@@ -16,23 +15,27 @@ public class TransactionSimulation {
             int v = random.nextInt(NUM_TRANS);
             if (random.nextInt(2) == 0) {
                 // Credit transaction
-                balance += v;
-                credits += v;
+                synchronized (this) {
+                    balance += v;
+                    credits += v;
+                }
             } else {
                 // Debit transaction
-                balance -= v;
-                debits += v;
+                synchronized (this){
+                    balance -= v;
+                    debits += v;
+                }
             }
         }
     }
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
-        TransactionSimulation simulation = new TransactionSimulation();
+        TransactionSimulation1 simulation = new TransactionSimulation1();
         simulation.performTransaction();
         long endTime = System.currentTimeMillis();
         System.out.println("Final Balance: " + simulation.balance);
-        System.out.println("Final Balance2: " + (TransactionSimulation.INIT_BALANCE + simulation.credits - simulation.debits));
+        System.out.println("Final Balance2: " + (TransactionSimulation1.INIT_BALANCE + simulation.credits - simulation.debits));
         System.out.println("Total Credits: " + simulation.credits);
         System.out.println("Total Debits: " + simulation.debits);
         long elapsedTime = endTime - startTime;
